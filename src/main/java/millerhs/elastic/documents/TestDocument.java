@@ -1,4 +1,4 @@
-package millerhs.elastic.entities;
+package millerhs.elastic.documents;
 
 import java.time.ZonedDateTime;
 
@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Document(indexName = "test-index")
-public class TestEntity {
+public class TestDocument {
 
 	// ID
 	

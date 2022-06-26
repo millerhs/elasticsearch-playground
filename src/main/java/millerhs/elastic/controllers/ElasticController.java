@@ -16,28 +16,37 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 
-import millerhs.elastic.entities.TestEntity;
-import millerhs.elastic.services.TestService;
+import millerhs.elastic.documents.TestDocument;
+import millerhs.elastic.services.ElasticService;
+import millerhs.elastic.services.TikaService;
 
 @RestController
-public class TestController {
+public class ElasticController {
 
 	@Autowired
-	TestService testService;
+	ElasticService elasticService;
+	
+	@Autowired
+	TikaService tikaService;
 	
 	@GetMapping("/search")
-	public List<TestEntity> search(@RequestParam String search) {
-		return testService.search(search);
+	public List<TestDocument> search(@RequestParam String search) {
+		return elasticService.search(search);
 	}
 	
 	@PostMapping("/save")
-	public void save(@RequestBody TestEntity testEntity) {
-		testService.save(testEntity);
+	public void save(@RequestBody TestDocument testEntity) {
+		elasticService.save(testEntity);
 	}
 	
 	@PostMapping(path = "/save/{id}/file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public void saveFile(@PathVariable("id") String id, @RequestPart MultipartFile file) throws IOException, SAXException, TikaException {
-		testService.saveFile(id, file);
+		elasticService.saveFile(id, file);
+	}
+	
+	@GetMapping(path = "/tika", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public String tikaRead(@RequestPart MultipartFile file) throws IOException, SAXException, TikaException {
+		return tikaService.extractText(file.getBytes());
 	}
 	
 }
