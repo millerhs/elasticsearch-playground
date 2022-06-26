@@ -1,4 +1,4 @@
-package millerhs.elasic.configs;
+package millerhs.elastic.configs;
 
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,14 +12,14 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "com.example.demo")
-@ComponentScan(basePackages = { "com.example.demo" })
+@EnableElasticsearchRepositories(basePackages = "millerhs.elastic.repositories")
+@ComponentScan(basePackages = { "millerhs.elastic.documents" })
 public class ElasticConfig {
 	
-	@Value("${app.elastic.username}")
+	@Value("${millerhs.elastic.configs.elastic.username}")
 	String username;
 	
-	@Value("${app.elastic.password}")
+	@Value("${millerhs.elastic.configs.elastic.password}")
 	String password;
 
     @Bean

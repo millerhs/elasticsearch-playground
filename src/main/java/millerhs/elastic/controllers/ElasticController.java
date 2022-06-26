@@ -28,23 +28,36 @@ public class ElasticController {
 	
 	@Autowired
 	TikaService tikaService;
-	
+
+	/**
+	 * Performs a basic text search on all fields of the TestDocument index. This supports Lucene's query syntax.
+	 */
 	@GetMapping("/search")
 	public List<TestDocument> search(@RequestParam String search) {
 		return elasticService.search(search);
 	}
-	
+
+	/**
+	 * Updates the given document.
+	 */
 	@PostMapping("/save")
-	public void save(@RequestBody TestDocument testEntity) {
-		elasticService.save(testEntity);
+	public void save(@RequestBody TestDocument testDocument) {
+		elasticService.save(testDocument);
 	}
 	
+	/**
+	 * Updates the corresponding ES document with the filename and parsed text of the given MultipartFile.
+	 */
 	@PostMapping(path = "/save/{id}/file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public void saveFile(@PathVariable("id") String id, @RequestPart MultipartFile file) throws IOException, SAXException, TikaException {
 		elasticService.saveFile(id, file);
 	}
 	
-	@GetMapping(path = "/tika", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	/** 
+	 * Returns parsed text from a given file.
+	 * This isn't really creating anything; I just don't know how to include a MultipartFile in a GET request. 
+	 * **/
+	@PostMapping(path = "/tika", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String tikaRead(@RequestPart MultipartFile file) throws IOException, SAXException, TikaException {
 		return tikaService.extractText(file.getBytes());
 	}
