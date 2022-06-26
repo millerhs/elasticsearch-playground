@@ -1,11 +1,10 @@
-package com.example.demo;
+package millerhs.elastic.controllers;
 
 import java.io.IOException;
 import java.util.List;
 
 import org.apache.tika.exception.TikaException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
+
+import millerhs.elastic.entities.TestEntity;
+import millerhs.elastic.services.TestService;
 
 @RestController
 public class TestController {

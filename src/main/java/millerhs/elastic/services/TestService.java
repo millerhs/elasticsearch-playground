@@ -1,4 +1,4 @@
-package com.example.demo;
+package millerhs.elastic.services;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -21,6 +21,9 @@ import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
+
+import millerhs.elastic.entities.TestEntity;
+import millerhs.elastic.repositories.TestRepository;
 
 @Service
 public class TestService {

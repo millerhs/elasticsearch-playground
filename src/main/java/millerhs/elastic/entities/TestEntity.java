@@ -1,4 +1,4 @@
-package com.example.demo;
+package millerhs.elastic.entities;
 
 import java.time.ZonedDateTime;
 

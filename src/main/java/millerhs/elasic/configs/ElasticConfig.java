@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package millerhs.elasic.configs;
 
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
